@@ -6,6 +6,7 @@ let parse_line (line : string) : int list =
   |> List.filter (fun s -> String.trim s <> "")
   |> List.map (fun s ->
       if String.length s > 1 && s.[0] = '0' then
+        (* Убираем ведущий ноль и парсим *)
         int_of_string (String.sub s 1 (String.length s - 1))
       else
         int_of_string s

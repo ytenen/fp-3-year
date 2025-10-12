@@ -1,6 +1,6 @@
 (library
  (name lab1)
- (modules 
+ (modules
    matrix_utils
    tailrec_solver
    recursion_solver

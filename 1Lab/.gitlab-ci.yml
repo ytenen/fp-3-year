@@ -9,25 +9,25 @@ variables:
   tags: [wsl-shell]
   before_script:
     - eval $(opam env)
+    - cd 1Lab
 
 format:
   stage: check
   extends: .root-template
   script:
-    - FILES="$(git ls-files '*.ml' '*.mli' 'src/**/*.ml' 'src/**/*.mli' 'lib/**/*.ml' 'lib/**/*.mli' 'test/**/*.ml' 'test/**/*.mli' || true)"
-    - |
-      if [ -n "$FILES" ]; then
-        ocamlformat --check $FILES
-      else
-        echo "No OCaml files"
-      fi
+    - dune build @fmt  
 
 lint:
   stage: check
   extends: .root-template
   script:
-    - dune build @all --profile=release
+    - dune build --profile=release @check 
 
+build:
+  stage: check
+  extends: .root-template
+  script:
+    - dune build --profile=release
 test:
   stage: test
   extends: .root-template

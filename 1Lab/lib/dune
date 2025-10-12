@@ -1,0 +1,10 @@
+(library
+ (name lab1)
+ (modules 
+   matrix_utils
+   tailrec_solver
+   recursion_solver
+   modular_solver
+   map_solver
+   loop_solver)
+ (libraries))

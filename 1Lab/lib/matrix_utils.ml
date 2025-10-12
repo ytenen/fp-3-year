@@ -2,7 +2,8 @@ type matrix = int list list
 
 let parse_line (line : string) : int list =
   line
-  |> String.split_on_char ' '
+  |> String.
+  split_on_char ' '
   |> List.filter (fun s -> String.trim s <> "")
   |> List.map (fun s ->
       if String.length s > 1 && s.[0] = '0' then

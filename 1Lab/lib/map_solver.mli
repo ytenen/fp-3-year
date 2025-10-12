@@ -1,2 +1,1 @@
-val find_max_product : 
-Matrix_utils.matrix -> int
+val find_max_product : Matrix_utils.matrix -> int

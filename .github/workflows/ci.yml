@@ -24,18 +24,21 @@ jobs:
         
     - name: Check code formatting
       run: |
+        cd 1Lab
         dune build @fmt
         if ! git diff --quiet; then
-          echo "Code needs formatting! Run: dune build @fmt --auto-promote"
+          echo "❌ Code needs formatting! Run: dune build @fmt --auto-promote"
           git diff
           exit 1
         fi
         
     - name: Build with warnings
       run: |
+        cd 1Lab
         dune build --profile=release @check
         dune build --profile=release
         
     - name: Run tests
       run: |
+        cd 1Lab
         dune runtest --profile=release --force

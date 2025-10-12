@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: "4.14.1"
+        
+    - name: Install dependencies
+      run: |
+        opam update
+        opam install -y dune ocamlformat alcotest qcheck
+        
+    - name: Check code formatting
+      run: |
+        dune build @fmt
+        if ! git diff --quiet; then
+          echo "Code needs formatting! Run: dune build @fmt --auto-promote"
+          git diff
+          exit 1
+        fi
+        
+    - name: Build with warnings
+      run: |
+        dune build --profile=release @check
+        dune build --profile=release
+        
+    - name: Run tests
+      run: |
+        dune runtest --profile=release --force

@@ -16,6 +16,7 @@ jobs:
       uses: ocaml/setup-ocaml@v2
       with:
         ocaml-compiler: "4.14.1"
+        disable-sudo: true
         
     - name: Install dependencies
       run: |
